@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thylemeaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<hr class="border border-primary">
+
+				<h4 class="card-title">
+					<a class="btn btn-primary btn-xs" th:href="@{/dispo/listar}">Dispositivos</a>
+						
+					<a class="btn btn-success btn-xs" th:href="@{/con/listar}">Conexiones</a>		
+				</h4>
+				
+			
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

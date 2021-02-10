@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thylemeaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				
+
+				<h4 class="card-title">
+					<a class="btn btn-primary btn-xs" th:href="@{/index}">Volver</a>
+				</h4>
+				
+				<hr class="border border-primary">
+				
+				<h4 class="card-title">
+					<a class="btn btn-success btn-xs" th:href="@{/con/form}">Crear Nueva Conexion</a>
+				</h4>
+				 <table class="table table-striped">
+
+					<thead>
+						<tr class="">
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Tipo Cifrado</th>
+							<th>Usuario</th>
+							<th>Tipo Conexion</th>
+							<th>Editar</th>
+							<th>Eliminar</th>							
+
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="con: ${conexiones}">
+							<td><a class="btn btn-primary btn-xs" th:href="@{/con/ver/} + ${con.id}" th:text="${con.id}"></a></td>
+							<td th:text="${con.nombre}"></td>
+							<td th:text="${con.TipoCifrado.descripcion}"></td>
+							<td th:text="${con.usuario}"></td>
+							<td th:text="${con.tipoCon==0} ? 'WIFI' : 'LAN' "></td>
+							
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary" th:href="@{/con/editar/} + ${con.id}">Editar</a></td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger" th:href="@{/con/eliminar/} + ${con.id}"
+								onclick="return confirm('Estas seguro ?')">Eliminar</a></td> 
+
+
+						</tr>
+					</tbody>
+					
+					
+				</table>
+				
+			
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

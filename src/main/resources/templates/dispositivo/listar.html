@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thylemeaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				
+
+				<h4 class="card-title">
+					<a class="btn btn-primary btn-xs" th:href="@{/index}">Volver</a>
+			
+				
+				<hr class="border border-primary">
+				
+				<a class="btn btn-success btn-xs" th:href="@{/dispo/form}">Crear Nuevo Dispositivo</a>
+					</h4>
+				 <table class="table table-striped">
+
+					<thead>
+						<tr class="">
+							<th>Id</th>
+							<th>MAC</th>
+							<th>Tipo</th>
+							<th>Estado</th>
+						    <th>IP</th>
+							<th>Nombre Conexion</th>
+				            <th>Asignar Conexion</th>
+							<th>Editar</th>
+							<th>Eliminar</th>
+
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="dispo: ${dispositivos}">
+							<td><a class="btn btn-primary btn-xs" th:href="@{/dispo/ver/} + ${dispo.id}" th:text="${dispo.id}"></a></td>
+							<td th:text="${dispo.mac}"></td>
+							<td th:text="${dispo.TipoDispositivo.descripcion}"></td>
+							<td th:text="${dispo.conectado==0} ? 'Desconectado' : 'Conectado'"></td>
+							<td th:text="${dispo.ip}"></td>
+							<td th:text="${dispo.conexion!=null} ? ${dispo.conexion.nombre} : 'Sin Conexion'"></td>
+						
+							
+							
+							
+							<td><a class="btn btn-success btn-xs" th:text="'Asignar'" th:href="@{/dispo/asignar/} + ${dispo.id}"></a></td>
+							<td><a class="btn btn-primary" th:href="@{/dispo/editar/} + ${dispo.id}">Editar</a></td>
+							<td><a class="btn btn-danger" th:href="@{/dispo/eliminar/} + ${dispo.id}"
+								onclick="return confirm('Estas seguro ?')">Eliminar</a></td>
+
+
+						</tr>
+					</tbody>
+					
+					
+				</table>
+				
+			
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

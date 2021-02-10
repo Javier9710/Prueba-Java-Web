@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thylemeaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head">
+
+</head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+
+				<div th:if="${(dispositivo.conexion==null)}"
+					class="alert alert-danger my4"
+					th:text="'Actualmente este dispositivo no tiene Conexion - IP: '+ ${dispositivo.ip}"></div>
+					
+			   <div th:if="${(dispositivo.conexion!=null)}"
+					class="alert alert-info my4"
+					th:text="'Conexion Actual - id: '+ ${dispositivo.conexion.id} + ' - Nombre: ' + ${dispositivo.conexion.usuario}"></div>
+					
+					
+					<h4>Historial</h4>
+					
+				<table th:if="${(dispositivo!=null)}"
+					class="table table-bordered table-striped my-4">
+					<thead class="thead-dark">
+						<tr>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Usuario</th>
+							<th>Tipo Cifrado</th>
+							<th>Tipo Conexion</th>
+							<th>Fecha</th>
+						</tr>
+					</thead>
+					<tbody>
+
+				<tr th:each="historial: ${historial}">
+							<td th:text="${historial.id}"></td>
+							<td th:text="${historial.conexion.nombre}"></td>
+							<td th:text="${historial.conexion.usuario}"></td>
+							<td th:text="${historial.conexion.tipoCifrado.descripcion}"></td>
+							<td th:text="${historial.conexion.tipoCon==0} ? 'WIFI':'LAN'"></td>
+							<td th:text="${historial.fecha}"></td>
+							
+						</tr>
+ 
+					</tbody>
+
+
+
+				</table>
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>
